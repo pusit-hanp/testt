@@ -1,7 +1,0 @@
-<!-- Snippet only: add INSIDE the existing <appSettings> in the web project's Web.config.
-     Do not replace the entire Web.config or add another <appSettings> section.
-     If this key already exists, edit its value instead of adding a duplicate.
-     Fill the complete existing SmartWH Authorization header for TEST/UAT/PROD as appropriate.
-     Empty value is intentional: the Controller blocks Re-post until configured.
-     Keep the existing CONFIRM_CTN URL and ctnReport permission key. -->
-<add key="CONFIRM_CTN_AUTHORIZATION" value="" />
