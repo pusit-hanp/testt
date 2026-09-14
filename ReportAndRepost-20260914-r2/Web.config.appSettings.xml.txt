@@ -1,0 +1,8 @@
+<!-- Guidance only. Do not replace Web.config or add another appSettings section.
+     ReportAndRepost now uses the latest PS_TpostFromSlip SMART request contract.
+     No CONFIRM_CTN_AUTHORIZATION key or Authorization header is required by this code.
+     Keep the existing CONFIRM_CTN URL and ctnReport permission key in the web-root Web.config.
+     CONFIRM_CTN must be the confirm-CTN endpoint for the same environment as service ConfirmCtn,
+     not a host-only value or a CTN lookup URL. Do not assume the two keys have the same value.
+     If CONFIRM_CTN_AUTHORIZATION was added solely for the earlier ReportAndRepost, it can be removed.
+     No new appSetting is introduced in this revision. -->

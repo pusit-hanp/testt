@@ -1,0 +1,3 @@
+PASS complete build succeeds before the missing-dependency check
+PASS incomplete build is rejected despite DLLs from a previous successful run
+Isolation regression: 2 passed; evidence: D:\AI Playground\Chatgpt\PullList\05-Tests\HvpRuntimeSmoke\bin\isolation-aff988cef31647379bd476ab4fb7ce46

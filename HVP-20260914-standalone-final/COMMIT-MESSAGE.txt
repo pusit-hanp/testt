@@ -1,0 +1,9 @@
+refactor(hvp): make net48 service standalone and isolate runtime smoke tests
+
+- Remove all Pulllist project and assembly references.
+- Connect directly to Oracle through connectionStrings/Material.
+- Add persistent --background execution for Task Scheduler and keep manual EXE fallback.
+- Preserve five-minute scans, material matching, retry limits and durable state.
+- Pin standalone NuGet dependencies with packages.lock.json.
+- Isolate runtime smoke outputs so stale DLLs cannot hide incomplete builds.
+- Add missing-dependency regression and cumulative handover documentation.
