@@ -1,6 +1,0 @@
-perf(hvp): reduce checkpoint I/O and add log retention
-
-Cache unchanged state and sort only files that need processing or replay.
-Append durable state updates and compact duplicate history periodically.
-Retain service logs for configurable days and report scan timings.
-Preserve retry, skip and file ordering without adding a service database.

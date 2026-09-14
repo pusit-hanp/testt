@@ -1,6 +1,0 @@
-@* Insert this item inside the EXISTING Report submenu, beside CTN Report.
-   Keep the same existing visibility/permission wrapper as CTN Report.
-   The actual menu source was not supplied, so do not replace the menu. *@
-<li>
-    <a href="@Url.Action("Index", "ReportAndRepost")">Report and Repost</a>
-</li>
