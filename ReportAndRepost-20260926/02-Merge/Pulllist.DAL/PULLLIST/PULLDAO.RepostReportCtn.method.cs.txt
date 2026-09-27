@@ -1,0 +1,118 @@
+public ReportAndRepostResult RepostReportCtn(string rowId,
+    Func<ReportAndRepostRow, ReportAndRepostSmartReply> sendToSmart)
+{
+    var result = new ReportAndRepostResult { ROW_ID = rowId, Outcome = "SKIPPED" };
+    using (var session = new SessionFactory(base.ConnectionString))
+    {
+        if (session.Conn.State != ConnectionState.Open) session.Conn.Open();
+        using (var transaction = session.Conn.BeginTransaction())
+        {
+            bool smartSucceeded = false;
+            bool smartUncertain = false;
+            string smartFailureDetail = null;
+            try
+            {
+                DynamicParameters param = new DynamicParameters();
+                param.Add("ROW_ID", rowId);
+                var row = session.Conn.Query<ReportAndRepostRow>(@"
+                    SELECT ROWIDTOCHAR(fifo.ROWID) ROW_ID,
+                        fifo.MI_SLIPNUMBER, fifo.CTN, fifo.PN, fifo.BATCH, fifo.STATUS_TRANFER
+                    FROM PULLLIST_FIFOLOG fifo
+                    WHERE fifo.ROWID = CHARTOROWID(:ROW_ID)
+                    FOR UPDATE NOWAIT", param, transaction).SingleOrDefault();
+                if (row == null)
+                {
+                    result.Message = "Row no longer exists. Search again.";
+                    transaction.Rollback();
+                    return result;
+                }
+                result.CTN = row.CTN;
+                result.MI_SLIPNUMBER = row.MI_SLIPNUMBER;
+                DynamicParameters headerParam = new DynamicParameters();
+                headerParam.Add("SLIP", row.MI_SLIPNUMBER);
+                var header = session.Conn.Query<ReportAndRepostRow>(
+                    "SELECT * FROM (" + ReportRepostHeaderSql() + ") WHERE MISLIP_NO = :SLIP",
+                    headerParam, transaction).SingleOrDefault();
+                if (header != null)
+                {
+                    row.SAP_DOC1 = header.SAP_DOC1;
+                    row.ISSUE_BY = header.ISSUE_BY;
+                    row.HEADER_COUNT = header.HEADER_COUNT;
+                }
+                DynamicParameters identity = new DynamicParameters();
+                identity.Add("CTN", row.CTN);
+                identity.Add("SLIP", row.MI_SLIPNUMBER);
+                row.TRANSACTION_ROWS = session.Conn.Query<int>(@"
+                    SELECT COUNT(*) FROM PULLLIST_FIFOLOG
+                    WHERE CTN = :CTN AND MI_SLIPNUMBER = :SLIP", identity, transaction).Single();
+                string reason = ReportAndRepostStatus.GetBlockReason(row);
+                if (reason != "")
+                {
+                    result.Message = reason;
+                    transaction.Rollback();
+                    return result;
+                }
+
+                // Keep the DB row locked while the existing HTTP call style runs in Controller.
+                // The callback avoids adding RestSharp to the DAL or creating an interface.
+                ReportAndRepostSmartReply reply = sendToSmart(row);
+                smartUncertain = reply.IsUncertain;
+                smartSucceeded = reply.Success && !smartUncertain;
+                if (!smartSucceeded)
+                {
+                    result.Outcome = reply.IsUncertain ? "SMART_RESULT_UNKNOWN" : "FAILED";
+                    result.Message = reply.IsUncertain
+                        ? "SmartWH result is unknown. Check before sending again. " + reply.Detail
+                        : reply.Detail;
+                    if (smartUncertain || ReportAndRepostStatus.GetKind(reply.StatusToSave) != "FAIL")
+                    {
+                        transaction.Rollback();
+                        return result;
+                    }
+                    smartFailureDetail = reply.Detail ?? "";
+                }
+
+                param.Add("NEW_STATUS", smartSucceeded ? ReportAndRepostStatus.SuccessStatus : reply.StatusToSave);
+                param.Add("OLD_STATUS", row.STATUS_TRANFER);
+                param.Add("SLIP", row.MI_SLIPNUMBER);
+                param.Add("CTN", row.CTN);
+                int changed = session.Conn.Execute(@"
+                    UPDATE PULLLIST_FIFOLOG SET STATUS_TRANFER = :NEW_STATUS
+                    WHERE ROWID = CHARTOROWID(:ROW_ID)
+                      AND MI_SLIPNUMBER = :SLIP AND CTN = :CTN
+                      AND STATUS_TRANFER = :OLD_STATUS", param, transaction);
+                if (changed != 1) throw new InvalidOperationException("Expected to update exactly one log row.");
+                transaction.Commit();
+                result.Success = smartSucceeded;
+                result.Outcome = smartSucceeded ? "SUCCESS" : "FAILED";
+                result.Message = smartSucceeded
+                    ? "SmartWH confirmed success; Pull List status updated."
+                    : smartFailureDetail + " Pull List status updated.";
+            }
+            catch (Exception ex)
+            {
+                try { transaction.Rollback(); } catch { }
+                if (smartUncertain)
+                {
+                    // Cleanup failure must not make an unknown SmartWH result safe to retry.
+                    result.Outcome = "SMART_RESULT_UNKNOWN";
+                    result.Message += " DB cleanup failed: " + ex.Message;
+                }
+                else if (smartFailureDetail != null)
+                {
+                    result.Outcome = "SMART_FAIL_DB_FAILED";
+                    result.Message = smartFailureDetail +
+                        " SmartWH returned Fail, but DB save was not confirmed. " + ex.Message;
+                }
+                else
+                {
+                    result.Outcome = smartSucceeded ? "SMART_SUCCESS_DB_FAILED" : "FAILED";
+                    result.Message = smartSucceeded
+                        ? "SmartWH confirmed success, but DB save was not confirmed. Check before sending again. " + ex.Message
+                        : ex.Message;
+                }
+            }
+        }
+    }
+    return result;
+}
