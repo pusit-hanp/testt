@@ -1,8 +1,0 @@
-Runtime smoke output: D:\AI Playground\Chatgpt\PullList\create_image_temp\hvp-handover-verify-28c6620b93d94b6bb5b32a858d3d5f4b\05-Tests\HvpRuntimeSmoke\bin\5b292d5a4aa046e084008e71a120d8d2
-PASS actual Oracle driver accepts the supplied SID descriptor without connecting
-PASS actual Dapper binds Oracle values in SQL order and maps null to DBNull
-PASS actual ASN1 dependency decodes under net48
-PASS actual JSON dependency round trips under net48
-FAIL standalone HvpService accepts Material config and empty work without DB type=System.IO.FileLoadException
-FAIL production EXE assembly references contain no Pulllist assemblies type=System.IO.FileLoadException
-Failures: 2
