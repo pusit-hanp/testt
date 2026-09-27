@@ -1,0 +1,4 @@
+a214fe941de611b37786c91c12a53e72e9edf1aed39f6f070793ddc1978abd98  RoleValidation.Web/wwwroot/js/application-users.js
+412c3e1c7372ed82888dd54991e2edaafc748ed1a63923a51393fc42111aa6a4  RoleValidation.Web.Tests/JavaScript/application-users.behavior.test.js
+f33d4af30c37cfc51a4afe9842bc3a995eff4b426338944b0913cfe44aa62347  RoleValidation.Web.Tests/ApplicationUsers/ApplicationUsersViewContractTests.cs
+33985d013739844d4d9c28ef956d9729bd4959c495028eb4ec89f0848fa45332  docs/security/2026-09-27-snyk-remaining-redirect.md
