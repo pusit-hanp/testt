@@ -1,0 +1,495 @@
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-c78c5c2df43d4ad2928b4a7039a91d4b
+2026-09-29 07:07:01 START file=old-Z02J-HVP.txt creationUtc=2026-09-28T23:37:01.9035561Z lastWriteUtc=2026-09-29T00:06:56.9037555Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=old-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=old-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=20 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=2 sortedFiles=1 stateBytesWritten=299 stateCompactions=0
+PASS older creation time with recently updated time is still processed
+2026-09-29 07:07:01 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-b95601964c614787aa547c771bccae2c
+2026-09-29 07:07:01 START file=a-Z02J-HVP.txt creationUtc=2026-09-28T23:37:01.9331005Z lastWriteUtc=2026-09-28T23:37:01.9331500Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=a-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=a-Z02J-HVP.txt
+2026-09-29 07:07:01 START file=b-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9337085Z lastWriteUtc=2026-09-28T23:47:01.9337785Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=b-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=b-Z02J-HVP.txt
+2026-09-29 07:07:01 START file=z-Z02J-HVP.txt creationUtc=2026-09-28T23:57:01.9328191Z lastWriteUtc=2026-09-28T23:57:01.9328889Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=z-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=z-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=3 elapsedMs=6 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=3 stateBytesWritten=885 stateCompactions=0
+PASS all pending files run in creation order with stable tie order
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-3fb673584a8b4a4986104a4310ea0fb5
+2026-09-29 07:07:01 START file=one-Z02J-HVP.txt creationUtc=2026-09-29T00:06:01.9421309Z lastWriteUtc=2026-09-29T00:06:01.9421880Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=one-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=one-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=299 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-3fb673584a8b4a4986104a4310ea0fb5
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS success survives processor restart without replay; source remains intact
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-eba77e03031d4080990dc89dc23235be
+2026-09-29 07:07:01 START file=same-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9471681Z lastWriteUtc=2026-09-28T23:47:01.9472187Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=same-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=same-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-eba77e03031d4080990dc89dc23235be
+2026-09-29 07:07:01 START file=same-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9471681Z lastWriteUtc=2026-09-29T00:06:56.9506296Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=same-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=same-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS same pathname with changed time/content is processed again
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-bd5fbb9431e44888ad0e13ea4e80b184
+2026-09-29 07:07:01 START file=header-Z02J-HVP.txt creationUtc=2026-09-29T00:06:01.9539475Z lastWriteUtc=2026-09-29T00:06:01.9540042Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=2 file=header-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=header-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=305 stateCompactions=0
+PASS header padding and case don't lose a valid SAP export
+2026-09-29 07:07:01 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-69742d17fd984e5cb2e6107c32bd7b4a
+2026-09-29 07:07:01 START file=short-Z02J-HVP.txt creationUtc=2026-09-29T00:06:01.9574375Z lastWriteUtc=2026-09-29T00:06:01.9574876Z attempt=1/3
+2026-09-29 07:07:01 INVALID ROW file=short-Z02J-HVP.txt line=3
+2026-09-29 07:07:01 FAILED file=short-Z02J-HVP.txt attempt=1/3 type=System.IO.InvalidDataException hresult=-2146233087
+2026-09-29 07:07:01 Incomplete SAP row; no rows from this file have been applied.
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=3 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=306 stateCompactions=0
+PASS truncated row doesn't clear a flag or partly apply the file
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-898a3963a732413e987ac906a7423b6e
+2026-09-29 07:07:01 START file=first-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9624254Z lastWriteUtc=2026-09-28T23:47:01.9624794Z attempt=1/3
+2026-09-29 07:07:01 FAILED file=first-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=460 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-898a3963a732413e987ac906a7423b6e
+2026-09-29 07:07:01 START file=first-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9624254Z lastWriteUtc=2026-09-28T23:47:01.9624794Z attempt=2/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=first-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=first-Z02J-HVP.txt
+2026-09-29 07:07:01 START file=second-Z02J-HVP.txt creationUtc=2026-09-28T23:57:01.9626827Z lastWriteUtc=2026-09-28T23:57:01.9627290Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=second-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=second-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=2 elapsedMs=2 files=2 stateCount=2 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=301 stateCompactions=0
+PASS failed oldest file blocks later writes until retry succeeds
+2026-09-29 07:07:01 SOURCE UNAVAILABLE folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2df4351ba4a84e23b89a8a3d995e9f6a\missing
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS unavailable source folder has a visible failure
+2026-09-29 07:07:01 DB CONFIG FAILED: set connectionStrings/Material in Z02JHVPService.exe.config.
+PASS missing direct connection cannot claim successful initialization
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-0b92956f4e0249b2bd0c8aa6e5ea8803
+2026-09-29 07:07:01 START file=old-Z02J-HVP.txt creationUtc=2026-09-28T23:37:01.9719012Z lastWriteUtc=2026-09-28T23:37:01.9719527Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=old-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=old-Z02J-HVP.txt
+2026-09-29 07:07:01 START file=new-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9722769Z lastWriteUtc=2026-09-28T23:47:01.9723273Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=new-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=new-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=2 elapsedMs=3 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=598 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-0b92956f4e0249b2bd0c8aa6e5ea8803
+2026-09-29 07:07:01 START file=old-Z02J-HVP.txt creationUtc=2026-09-28T23:37:01.9719012Z lastWriteUtc=2026-09-29T00:06:56.9764609Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=old-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=old-Z02J-HVP.txt
+2026-09-29 07:07:01 START file=new-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9722769Z lastWriteUtc=2026-09-28T23:47:01.9723273Z attempt=1/3
+2026-09-29 07:07:01 FAILED file=new-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=601 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-0b92956f4e0249b2bd0c8aa6e5ea8803
+2026-09-29 07:07:01 START file=new-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9722769Z lastWriteUtc=2026-09-28T23:47:01.9723273Z attempt=2/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=new-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=new-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=1 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=148 stateCompactions=0
+PASS changed older file replays later files, including a failed replay after restart
+PASS concurrent process cannot enter the same checkpoint job
+PASS SQL applies by material only, never plant/sloc
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f670d3c3fb314c4b9d267d8c8d22245a
+2026-09-29 07:07:01 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9842533Z lastWriteUtc=2026-09-28T23:47:01.9844067Z attempt=1/3
+2026-09-29 07:07:01 FAILED file=bad-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=454 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f670d3c3fb314c4b9d267d8c8d22245a
+2026-09-29 07:07:01 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9842533Z lastWriteUtc=2026-09-28T23:47:01.9844067Z attempt=2/3
+2026-09-29 07:07:01 FAILED file=bad-Z02J-HVP.txt attempt=2/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=1 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=151 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f670d3c3fb314c4b9d267d8c8d22245a
+2026-09-29 07:07:01 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9842533Z lastWriteUtc=2026-09-28T23:47:01.9844067Z attempt=3/3
+2026-09-29 07:07:01 FAILED file=bad-Z02J-HVP.txt attempt=3/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:01 SKIP file=bad-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:01 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:01.9847871Z lastWriteUtc=2026-09-28T23:57:01.9848476Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=1 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=300 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f670d3c3fb314c4b9d267d8c8d22245a
+2026-09-29 07:07:01 SCAN END completedFiles=0 elapsedMs=0 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f670d3c3fb314c4b9d267d8c8d22245a
+2026-09-29 07:07:01 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9842533Z lastWriteUtc=2026-09-29T00:06:59.9929290Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=bad-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=bad-Z02J-HVP.txt
+2026-09-29 07:07:01 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:01.9847871Z lastWriteUtc=2026-09-28T23:57:01.9848476Z attempt=1/3
+2026-09-29 07:07:01 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:01 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:01 SCAN END completedFiles=2 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=600 stateCompactions=0
+PASS third failure skips persistently and continues to the next file
+2026-09-29 07:07:01 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-13d510c50ff14352bceab6ffa91ca379
+2026-09-29 07:07:01 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:01.9965939Z lastWriteUtc=2026-09-28T23:47:01.9966509Z attempt=1/1
+2026-09-29 07:07:01 FAILED file=bad-Z02J-HVP.txt attempt=1/1 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=bad-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:01.9970258Z lastWriteUtc=2026-09-28T23:57:01.9970917Z attempt=1/1
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=3 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=603 stateCompactions=0
+PASS configured attempt limit 1
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-5cdf5fb3f9c04d71b00d5bb09148f11e
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0018626Z lastWriteUtc=2026-09-28T23:47:02.0019152Z attempt=1/2
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=1/2 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=454 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-5cdf5fb3f9c04d71b00d5bb09148f11e
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0018626Z lastWriteUtc=2026-09-28T23:47:02.0019152Z attempt=2/2
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=2/2 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=bad-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.0021041Z lastWriteUtc=2026-09-28T23:57:02.0021627Z attempt=1/2
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=300 stateCompactions=0
+PASS configured attempt limit 2
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-c443695db16748c9a892fabd20946be3
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0090477Z lastWriteUtc=2026-09-28T23:47:02.0091045Z attempt=1/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=454 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-c443695db16748c9a892fabd20946be3
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0090477Z lastWriteUtc=2026-09-28T23:47:02.0091045Z attempt=2/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=2/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=151 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-c443695db16748c9a892fabd20946be3
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0090477Z lastWriteUtc=2026-09-28T23:47:02.0091045Z attempt=3/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=3/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=bad-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.0092868Z lastWriteUtc=2026-09-28T23:57:02.0093321Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=300 stateCompactions=0
+PASS configured attempt limit bad
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-3ba41cf5fb724e76877a61747d324cf2
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0169003Z lastWriteUtc=2026-09-28T23:47:02.0169842Z attempt=1/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=454 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-3ba41cf5fb724e76877a61747d324cf2
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0169003Z lastWriteUtc=2026-09-28T23:47:02.0169842Z attempt=2/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=2/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=151 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-3ba41cf5fb724e76877a61747d324cf2
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0169003Z lastWriteUtc=2026-09-28T23:47:02.0169842Z attempt=3/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=3/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=bad-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.0171944Z lastWriteUtc=2026-09-28T23:57:02.0172448Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=300 stateCompactions=0
+PASS configured attempt limit 0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-787767a55c824e4db22566bcdab747e7
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0249818Z lastWriteUtc=2026-09-28T23:47:02.0250375Z attempt=1/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=454 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-787767a55c824e4db22566bcdab747e7
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0249818Z lastWriteUtc=2026-09-28T23:47:02.0250375Z attempt=2/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=2/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=151 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-787767a55c824e4db22566bcdab747e7
+2026-09-29 07:07:02 START file=bad-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.0249818Z lastWriteUtc=2026-09-28T23:47:02.0250375Z attempt=3/3
+2026-09-29 07:07:02 FAILED file=bad-Z02J-HVP.txt attempt=3/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=bad-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 START file=next-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.0253853Z lastWriteUtc=2026-09-28T23:57:02.0254537Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=next-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=next-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=2 stateCount=2 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=300 stateCompactions=0
+PASS configured attempt limit -1
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-b475a13c1b1e486abf75b0a3a6664246
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS legacy four-column checkpoint remains compatible
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-fa5aa1a098ed4eb7ab22bfd5d60d3384
+2026-09-29 07:07:02 START file=a-Z02J-HVP.txt creationUtc=2026-09-28T23:37:02.0359906Z lastWriteUtc=2026-09-28T23:37:02.0360579Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=a-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=a-Z02J-HVP.txt
+2026-09-29 07:07:02 DEFER file=b-Z02J-HVP.txt; changed since scan; reorder next scan.
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=3 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=3 stateBytesWritten=593 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-fa5aa1a098ed4eb7ab22bfd5d60d3384
+2026-09-29 07:07:02 START file=c-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.0366278Z lastWriteUtc=2026-09-28T23:57:02.0366861Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=c-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=c-Z02J-HVP.txt
+2026-09-29 07:07:02 START file=b-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.0392282Z lastWriteUtc=2026-09-29T00:07:02.0393252Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=b-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=b-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=2 elapsedMs=2 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=2 stateBytesWritten=441 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-fa5aa1a098ed4eb7ab22bfd5d60d3384
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS changed queued file is deferred and reordered newer
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2968c1cfcf0c4f5a9c30f9669950e4eb
+2026-09-29 07:07:02 START file=a-Z02J-HVP.txt creationUtc=2026-09-28T23:37:02.0450737Z lastWriteUtc=2026-09-28T23:37:02.0451313Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=a-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=a-Z02J-HVP.txt
+2026-09-29 07:07:02 DEFER file=b-Z02J-HVP.txt; changed since scan; reorder next scan.
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=3 stateBytesWritten=593 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2968c1cfcf0c4f5a9c30f9669950e4eb
+2026-09-29 07:07:02 START file=b-Z02J-HVP.txt creationUtc=2026-09-28T23:27:02.0478999Z lastWriteUtc=2026-09-29T00:07:02.0479491Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=b-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=b-Z02J-HVP.txt
+2026-09-29 07:07:02 START file=a-Z02J-HVP.txt creationUtc=2026-09-28T23:37:02.0450737Z lastWriteUtc=2026-09-28T23:37:02.0451313Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=a-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=a-Z02J-HVP.txt
+2026-09-29 07:07:02 START file=c-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.0456507Z lastWriteUtc=2026-09-28T23:57:02.0457195Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=c-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=c-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=3 elapsedMs=3 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=3 stateBytesWritten=736 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2968c1cfcf0c4f5a9c30f9669950e4eb
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=3 stateCount=3 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS changed queued file is deferred and reordered older
+2026-09-29 07:07:02 RETENTION TEST
+PASS retention deletes expired filename dates and keeps boundary/current/future logs
+2026-09-29 07:07:02 RETENTION SCOPE TEST
+PASS retention only deletes exact daily log filenames in State
+2026-09-29 07:07:02 RETENTION SOURCE DIRECTORY TEST
+PASS retention skips cleanup when State is the SAP source directory
+2026-09-29 07:07:02 RETENTION DEFAULT TEST
+PASS retention uses 30-day default for missing config
+2026-09-29 07:07:02 RETENTION DEFAULT TEST
+PASS retention uses 30-day default for bad
+2026-09-29 07:07:02 RETENTION DEFAULT TEST
+PASS retention uses 30-day default for -1
+2026-09-29 07:07:02 RETENTION DEFAULT TEST
+PASS retention uses 30-day default for 2147483648
+2026-09-29 07:07:02 RETENTION CONFIG TEST
+PASS retention honors a configured positive number of days
+2026-09-29 07:07:02 RETENTION DISABLED TEST
+PASS retention zero disables cleanup while logging continues
+2026-09-29 07:07:02 RETENTION LARGE CONFIG TEST
+PASS retention very large positive setting does not overflow the cutoff
+2026-09-29 07:07:02 RETENTION FIRST DIRECTORY
+2026-09-29 07:07:02 RETENTION SAME DAY
+2026-09-29 07:07:02 RETENTION SECOND DIRECTORY
+2026-09-29 07:07:02 RETENTION RETURN TO FIRST
+PASS retention runs once per day for each State directory
+2026-09-29 07:07:02 RETENTION PREVIOUS DAY
+2026-09-29 07:07:02 RETENTION NEXT DAY
+PASS retention retries cleanup on the next local calendar day
+2026-09-29 07:07:02 RETENTION CONTINUES AFTER FAILURE
+2026-09-29 07:07:02 LOG CLEANUP FAILED; check State log permissions.
+2026-09-29 07:07:02 RETENTION NO SAME DAY RETRY
+PASS retention cleanup failure is sanitized and does not prevent writes or other deletions
+2026-09-29 07:07:02 RETENTION REPARSE CHILD TEST
+2026-09-29 07:07:02 RETENTION REPARSE STATE TEST
+2026-09-29 07:07:02 RETENTION REPARSE ANCESTOR TEST
+PASS retention skips reparse directories including State and its ancestors
+2026-09-29 07:07:02 RETENTION CULTURE TEST
+PASS retention uses Gregorian daily filenames regardless of process culture
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-7271d9056bd64c0d868d7189e577f6ad
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS row-count compaction preserves the last committed state and bounds duplicate history
+PASS daily compaction keeps pending attempts and does not run for every following append
+PASS failed append invalidates uncommitted cached success
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-d36383279101453a85c7f13ac0229d85
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=1 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS failed compaction leaves the appended result recoverable and ignores stale temp files
+2026-09-29 07:07:02 STATE RECOVERED discardedUnterminatedBytes=137
+2026-09-29 07:07:02 SCAN files=3 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-c09a19cb8dc2418ab39498935f547451
+2026-09-29 07:07:02 START file=A-Z02J-HVP.txt creationUtc=2026-09-28T23:37:02.1660496Z lastWriteUtc=2026-09-29T00:07:02.1647713Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=A-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=A-Z02J-HVP.txt
+2026-09-29 07:07:02 START file=B-Z02J-HVP.txt creationUtc=2026-09-28T23:47:02.1661165Z lastWriteUtc=2026-09-29T00:07:02.1652816Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=B-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=B-Z02J-HVP.txt
+2026-09-29 07:07:02 START file=C-Z02J-HVP.txt creationUtc=2026-09-28T23:57:02.1661589Z lastWriteUtc=2026-09-29T00:07:02.1658129Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=C-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=C-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=3 elapsedMs=7 files=3 stateCount=3 stateReloaded=True stateLoadMs=1 enumerateMs=0 sortedFiles=3 stateBytesWritten=736 stateCompactions=0
+PASS partial pending tail before a crash is rebuilt before any DB write
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-20199544fe414d68baad087d7ee6c36a
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=1 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS atomic replacement failure preserves main checkpoint and ignores a completed temp snapshot
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-98c19d5464e4486897a4f58fcbe8e253
+2026-09-29 07:07:02 START file=M1-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.1821319Z lastWriteUtc=2026-09-29T00:07:02.1821319Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=M1-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=M1-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=297 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-98c19d5464e4486897a4f58fcbe8e253
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS unchanged warm scan does not reopen checkpoint content
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f9fba6d72f7443b7bea5fa198bc28cad
+2026-09-29 07:07:02 START file=M1-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.1946997Z lastWriteUtc=2026-09-29T00:07:02.1946997Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=M1-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=M1-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=6 files=1 stateCount=10001 stateReloaded=True stateLoadMs=3 enumerateMs=0 sortedFiles=1 stateBytesWritten=297 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f9fba6d72f7443b7bea5fa198bc28cad
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=8 files=1 stateCount=10001 stateReloaded=True stateLoadMs=8 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS large history receives bounded appended updates for a new file
+2026-09-29 07:07:02 STATE RECOVERED discardedUnterminatedBytes=143
+2026-09-29 07:07:02 SCAN files=2 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-3ca50c783c43467babee49a68f33cb09
+2026-09-29 07:07:02 START file=PENDING-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2237124Z lastWriteUtc=2026-09-29T00:07:02.2237124Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=PENDING-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=PENDING-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=4 files=2 stateCount=2 stateReloaded=True stateLoadMs=1 enumerateMs=1 sortedFiles=1 stateBytesWritten=307 stateCompactions=0
+PASS unterminated append resembling a legacy done row cannot hide pending work
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS complete malformed checkpoint record fails before DB writes
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-1d5b9fdd8a3f4ca2931070e188a85cd6
+2026-09-29 07:07:02 START file=M1-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2319330Z lastWriteUtc=2026-09-29T00:07:02.2319330Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=M1-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=M1-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=3 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=297 stateCompactions=0
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS external checkpoint change invalidates a warm cache
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-9566f2068d38424dac873998585a3e65
+2026-09-29 07:07:02 START file=M1-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2375180Z lastWriteUtc=2026-09-29T00:07:02.2375180Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=M1-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=M1-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=3 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=297 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-9566f2068d38424dac873998585a3e65
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS scan summary reports full duration state load and number sorted
+PASS direct Material connection opens once and disposes after all records
+2026-09-29 07:07:02 DB CONFIG FAILED: set connectionStrings/Material in Z02JHVPService.exe.config.
+PASS missing Material config is rejected without opening Oracle
+2026-09-29 07:07:02 DB CONFIG FAILED: set connectionStrings/Material in Z02JHVPService.exe.config.
+PASS blank Material config is rejected
+PASS empty work does not open an Oracle connection
+PASS Oracle open failure propagates and disposes without writes
+PASS Oracle command failure stops remaining records and disposes
+PASS material value remains a parameter and is not inserted into SQL
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2e6cbce174db4ce0bebf7542d38a7417
+2026-09-29 07:07:02 START file=one-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2462498Z lastWriteUtc=2026-09-29T00:07:02.2462498Z attempt=1/3
+2026-09-29 07:07:02 FAILED file=one-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=3 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=302 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2e6cbce174db4ce0bebf7542d38a7417
+2026-09-29 07:07:02 START file=one-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2462498Z lastWriteUtc=2026-09-29T00:07:02.2462498Z attempt=2/3
+2026-09-29 07:07:02 FAILED file=one-Z02J-HVP.txt attempt=2/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=151 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2e6cbce174db4ce0bebf7542d38a7417
+2026-09-29 07:07:02 START file=one-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2462498Z lastWriteUtc=2026-09-29T00:07:02.2462498Z attempt=3/3
+2026-09-29 07:07:02 FAILED file=one-Z02J-HVP.txt attempt=3/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=one-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=151 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2e6cbce174db4ce0bebf7542d38a7417
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS Oracle open failures retain existing three attempt skip policy
+PASS one file commits all database commands in one transaction
+PASS a new material without Plant errors instead of claiming success
+PASS failure on the second record rolls back earlier writes in that file
+PASS absent material inserts mapped fields with null unmapped values and system creation date
+PASS an existing material ignores insert-only fields and does not overwrite general data
+PASS insert accepts ROH and defaults missing location to STR9
+PASS insert accepts HALB and defaults missing location to STR9
+PASS insert accepts FERT and defaults missing location to STR9
+PASS blank Material errors before any SQL: null
+PASS blank Material errors before any SQL: 
+PASS blank Material errors before any SQL:   
+PASS unsupported insert material type errors without inventing a location
+PASS oversized insert field errors without truncation: Plant
+PASS oversized insert field errors without truncation: StorageLocation
+PASS oversized insert field errors without truncation: OldMaterialNo
+PASS oversized insert field errors without truncation: MaterialDescription
+PASS oversized insert field errors without truncation: MaterialGroup
+PASS oversized insert field errors without truncation: BaseUnit
+PASS oversized insert field errors without truncation: BasicMaterial
+PASS oversized insert field errors without truncation: PurchasingGroup
+PASS a concurrent insert with ORA-00001 retries the material-only update
+PASS insert Oracle error propagates when no matching material can be updated: 1
+PASS insert Oracle error propagates when no matching material can be updated: 1400
+PASS commit failure propagates and cannot leave the file's writes accepted
+PASS the database boundary normalizes non-HVP to NULL for both insert and update
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-b5de4f6fd0b24fd9b8c3e3dec6946a8a
+2026-09-29 07:07:02 START file=sap-CuStOm.TXT creationUtc=2026-09-29T00:07:02.2671930Z lastWriteUtc=2026-09-29T00:07:02.2671930Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-CuStOm.TXT; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-CuStOm.TXT
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=295 stateCompactions=0
+PASS configured suffix selects mixed-case filenames and excludes the old suffix
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS invalid suffix cannot select arbitrary source files: 
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS invalid suffix cannot select arbitrary source files:    
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS invalid suffix cannot select arbitrary source files: *
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS invalid suffix cannot select arbitrary source files: *.txt
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=0 stateCount=0 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS invalid suffix cannot select arbitrary source files: ../file.txt
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-4adf01f0c3404b87aaa08187f2053081
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2779874Z lastWriteUtc=2026-09-29T00:07:02.2779874Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=3 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS SAP insert maps approved fields and correct location for ROH
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-a75103e1d90a4c37a9f26e5d9b8c2924
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2825415Z lastWriteUtc=2026-09-29T00:07:02.2825415Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS SAP insert maps approved fields and correct location for HALB
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-d77f79f194a74437abeb7be2c5cc0878
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2861859Z lastWriteUtc=2026-09-29T00:07:02.2861859Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS SAP insert maps approved fields and correct location for FERT
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-a54524c36b89496bb4e9e42b6bbd39cf
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2903649Z lastWriteUtc=2026-09-29T00:07:02.2903649Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS blank approved SLOC defaults to STR9 for ROH
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-dbd4a7e921564a42a3583c4844d61413
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2941133Z lastWriteUtc=2026-09-29T00:07:02.2941133Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS blank approved SLOC defaults to STR9 for HALB
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-2734580ae67546f2acf7ddbd39a6d2b0
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.2971892Z lastWriteUtc=2026-09-29T00:07:02.2971892Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS blank approved SLOC defaults to STR9 for FERT
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-dc2f766f1a74483b8f90fc8b58c4ddb7
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3012526Z lastWriteUtc=2026-09-29T00:07:02.3017641Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=299 stateCompactions=0
+PASS missing location header uses STR9 with normalized header names and material type
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-e6ff91c6fc514468948670b10080b3f4
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3056864Z lastWriteUtc=2026-09-29T00:07:02.3056864Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+FAIL missing first Issue St Loc never borrows the BOM location for HALB => BOM location was used when the approved location header was missing
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-f139a3261112436cbc2752a3007ecb22
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3093295Z lastWriteUtc=2026-09-29T00:07:02.3093295Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=1 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+FAIL missing first Issue St Loc never borrows the BOM location for FERT => BOM location was used when the approved location header was missing
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-d1e81fa83bfa458d9e6391b8fc64f199
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3129069Z lastWriteUtc=2026-09-29T00:07:02.3129069Z attempt=1/3
+2026-09-29 07:07:02 DB COMMANDS completedRecords=2 file=sap-Z02J-HVP.txt; this is not an affected-row count.
+2026-09-29 07:07:02 DONE file=sap-Z02J-HVP.txt
+2026-09-29 07:07:02 SCAN END completedFiles=1 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=301 stateCompactions=0
+PASS duplicate new material keeps first inserted fields and applies the last flag
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-595f1db41cb1493cb190149b55a96ef9
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3175251Z lastWriteUtc=2026-09-29T00:07:02.3175251Z attempt=1/3
+2026-09-29 07:07:02 FAILED file=sap-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=304 stateCompactions=0
+FAIL insert validation logs the missing field without logging database secrets => Log did not identify the missing insert field
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-e1cae792261548259d280d68694c763b
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3211014Z lastWriteUtc=2026-09-29T00:07:02.3211014Z attempt=1/3
+2026-09-29 07:07:02 INVALID ROW file=sap-Z02J-HVP.txt line=3
+2026-09-29 07:07:02 FAILED file=sap-Z02J-HVP.txt attempt=1/3 type=System.IO.InvalidDataException hresult=-2146233087
+2026-09-29 07:07:02 Incomplete SAP row; no rows from this file have been applied.
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=302 stateCompactions=0
+PASS a truncated mapped field never partially updates existing materials
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-53e1f8278a1743129a689f5a8a7aaeeb
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3244537Z lastWriteUtc=2026-09-29T00:07:02.3244537Z attempt=1/3
+2026-09-29 07:07:02 FAILED file=sap-Z02J-HVP.txt attempt=1/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=304 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-53e1f8278a1743129a689f5a8a7aaeeb
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3244537Z lastWriteUtc=2026-09-29T00:07:02.3244537Z attempt=2/3
+2026-09-29 07:07:02 FAILED file=sap-Z02J-HVP.txt attempt=2/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=152 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-53e1f8278a1743129a689f5a8a7aaeeb
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3244537Z lastWriteUtc=2026-09-29T00:07:02.3244537Z attempt=3/3
+2026-09-29 07:07:02 FAILED file=sap-Z02J-HVP.txt attempt=3/3 type=System.InvalidOperationException hresult=-2146233079
+2026-09-29 07:07:02 SKIP file=sap-Z02J-HVP.txt; attempt limit reached; input unchanged.
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=1 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=152 stateCompactions=0
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-53e1f8278a1743129a689f5a8a7aaeeb
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=0 files=1 stateCount=1 stateReloaded=False stateLoadMs=0 enumerateMs=0 sortedFiles=0 stateBytesWritten=0 stateCompactions=0
+PASS missing Plant for a new material rolls back the file and skips after three attempts
+2026-09-29 07:07:02 SCAN files=1 folder=C:\Users\pusit\AppData\Local\Temp\hvp-regression-8a530022d6d3421dad61c4dea616ba75
+2026-09-29 07:07:02 START file=sap-Z02J-HVP.txt creationUtc=2026-09-29T00:07:02.3315273Z lastWriteUtc=2026-09-29T00:07:02.3315273Z attempt=1/3
+2026-09-29 07:07:02 INVALID ROW file=sap-Z02J-HVP.txt line=3
+2026-09-29 07:07:02 FAILED file=sap-Z02J-HVP.txt attempt=1/3 type=System.IO.InvalidDataException hresult=-2146233087
+2026-09-29 07:07:02 Incomplete SAP row; no rows from this file have been applied.
+2026-09-29 07:07:02 SCAN END completedFiles=0 elapsedMs=2 files=1 stateCount=1 stateReloaded=True stateLoadMs=0 enumerateMs=0 sortedFiles=1 stateBytesWritten=304 stateCompactions=0
+PASS blank Material rejects the whole file before DB work
+Failures: 3

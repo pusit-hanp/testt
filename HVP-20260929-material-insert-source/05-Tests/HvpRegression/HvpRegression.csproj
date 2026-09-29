@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <SourceDir Condition="'$(SourceDir)' == ''">../../02-Enhancement-Working/Z02JHVPService</SourceDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Stubs.cs" />
+    <Compile Include="LogRetentionTests.cs" />
+    <Compile Include="StatePerformanceTests.cs" />
+    <Compile Include="StandaloneDatabaseTests.cs" />
+    <Compile Include="FileSelectionTests.cs" />
+    <Compile Include="SapInsertFileTests.cs" />
+    <Compile Include="OracleStubs.cs" />
+    <Compile Include="$(SourceDir)/HvpFileProcessor.cs" />
+    <Compile Include="$(SourceDir)/HvpService.cs" />
+    <Compile Include="$(SourceDir)/HvpLog.cs" Condition="Exists('$(SourceDir)/HvpLog.cs')" />
+    <Compile Include="$(SourceDir)/HvpStateStore.cs" Condition="Exists('$(SourceDir)/HvpStateStore.cs')" />
+  </ItemGroup>
+</Project>

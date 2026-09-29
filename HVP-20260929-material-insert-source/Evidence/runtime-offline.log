@@ -1,0 +1,9 @@
+Runtime smoke output: D:\AI Playground\Chatgpt\PullList\05-Tests\HvpRuntimeSmoke\bin\d2f203fa0dcb413a9a50dc932e214501
+PASS actual Oracle driver accepts the supplied SID descriptor without connecting
+PASS actual Dapper binds Oracle values in SQL order and maps null to DBNull
+PASS actual ASN1 dependency decodes under net48
+PASS actual JSON dependency round trips under net48
+PASS standalone HvpService accepts Material config and empty work without DB
+ASSEMBLY REFERENCES mscorlib, System, System.Configuration, Oracle.ManagedDataAccess, Dapper, System.Data, System.ServiceProcess, System.Core
+PASS production EXE assembly references contain no Pulllist assemblies
+Failures: 0

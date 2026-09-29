@@ -1,0 +1,12 @@
+feat(hvp): insert missing materials from SAP exports
+
+- Match existing materials globally and update HVP flag and modify date only
+- Insert absent ROH, HALB and FERT materials using the approved field mapping
+- Resolve storage location by material type, default to STR9 and reject the BOM location
+- Keep unmapped insert fields null and validate required Material and Plant
+- Commit each file atomically and retain the existing retry and checkpoint behavior
+- Read the case-insensitive filename suffix from configuration
+- Add regression coverage and update standalone deployment documentation
+
+Retain .NET Framework 4.8, direct Oracle access and the existing package versions.
+No Pulllist references or new database tables.
