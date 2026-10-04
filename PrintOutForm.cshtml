@@ -1,0 +1,265 @@
+@model InventoryTransfer.ViewModels.InvenTransferViewModel
+@{
+    Layout = null;
+
+    string itnumberImg = string.Empty;
+    string fLocationImg = string.Empty;
+    string tLocationImg = string.Empty;
+
+    if (Model.BARCODEIMG != null)
+    {
+        var base64_itnumber = Convert.ToBase64String(Model.BARCODEIMG);
+        itnumberImg = String.Format("data:image/gif;base64,{0}", base64_itnumber);
+    }
+
+    if (Model.BARCODEFROMLOCATION != null)
+    {
+        var base64_fLocation = Convert.ToBase64String(Model.BARCODEFROMLOCATION);
+        fLocationImg = String.Format("data:image/gif;base64,{0}", base64_fLocation);
+    }
+
+    if (Model.BARCODETOLOCATION != null)
+    {
+        var base64_tLocation = Convert.ToBase64String(Model.BARCODETOLOCATION);
+        tLocationImg = String.Format("data:image/gif;base64,{0}", base64_tLocation);
+    }
+
+    var refdoc = (string)ViewData["REF-DOC"];
+    var returnpage = (string)ViewData["RETURN-PAGE"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintOutForm</title>
+    @Styles.Render("~/Content/css")
+    <style>
+        @@page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        @@media print {
+            .hide-on-print {
+                display: none !important;
+            }
+        }
+
+        .buttonAction {
+            position: fixed;
+            top: 20px;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body onload="window.print();">
+    <div class="hide-on-print">
+        <a class="btn btn-primary dontprint" href="@Url.Action("Index", returnpage)">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+        </a>
+        <button type="button" class="btn btn-info dontprint" onclick="window.print();">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print Preview
+        </button>
+    </div>
+
+    @{
+        var records = Model.INVENTORYTRANSFERDETAILS.Count;
+        var all_page = Math.Ceiling(records / 10.0);
+
+        for (int pages = 0; pages < all_page; pages++)
+        {
+            var p_start = pages * 10;
+            var p_end = (pages + 1) * 10;
+
+            <div style="width:1240px;height:850px;border:0px solid black;position:relative;left:0px;top:0px;margin:0;display:block">
+                <div style="font-family:'Angsana New';font-size:60px;font-weight:bold;position:relative;top:10px;width:1240px;text-align:center;">Celestica (Thailand) Ltd.</div>
+                <div style="font-family:'Angsana New';font-size:45px;font-weight:bold;position:absolute;top:60px;width:1240px;text-align:center;">INVENTORY TRANSFER</div>
+                <div style="font-size: 18px; font-weight: bold; position: absolute; top: 125px; left: 20px;">PRODUCT__________________  FROM PLANT__________________ TO PLANT__________________</div>
+                <div style="font-size: 18px; position: absolute; top: 125px; left: 160px;">@Model.PRODUCT</div>
+                <div style="font-size: 18px; position: absolute; top: 125px; left: 480px;">@Model.PLANT</div>
+                <div style="font-size: 18px; position: absolute; top: 125px; left: 750px;">@Model.TOPLANT</div>
+                <div style="font-size: 18px; font-weight: bold; position: absolute; top: 165px; left: 20px; width: 1200px;">FROM LOCATION___________________________________________ TO LOCATION_________________________________________</div>
+                <div style="font-size: 18px; position: absolute; top: 165px; left: 220px;">@Model.FROMLOCATION</div>
+                <div style="font-size: 18px; position: absolute; top: 165px; left: 780px;">@Model.TOLOCATION</div>
+
+                <div style="font-size:16px;font-weight:bold;position:absolute;top:50px;left:900px;width:150px;">IT NO.</div>
+                <div style="font-size:32px;position:absolute;top:33px;left:960px;color:red;">@Model.ITNUMBER.Replace("IT", "")</div>
+                @if (!string.IsNullOrEmpty(itnumberImg))
+                {
+                    <div style="font-size:30px;position:absolute;top:70px;left:890px;">
+                        <img src="@itnumberImg" height="35" />
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(fLocationImg))
+                {
+                    <div style="font-size:30px;position:absolute;top:145px;left:320px;">
+                        <img src="@fLocationImg" />
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(tLocationImg))
+                {
+                    <div style="font-size:30px;position:absolute;top:145px;left:880px;">
+                        <img src="@tLocationImg" />
+                    </div>
+                }
+
+                <table style="border: 2px solid black; border-collapse:collapse; table-layout:fixed; position: absolute; left: 20px; top: 200px; width: 1200px;">
+                    <colgroup>
+                        <col style="width:430px;" />
+                        <col style="width:70px;" />
+                        <col style="width:300px;" />
+                        <col style="width:200px;" />
+                        <col style="width:200px;" />
+                    </colgroup>
+                    <tr style="font-size:14px;font-weight:bold;height:100px;">
+                        <td colspan="4">
+                            <table style="border-collapse:collapse;table-layout:fixed;width:100%;">
+                                @{ bool isFirst = true; }
+                                @foreach (var item in Model.MOVEMENTTYPES)
+                                {
+                                    <tr style="height:20px;">
+                                        @if (isFirst)
+                                        {
+                                            isFirst = false;
+                                            <td width="300px" style="padding:0 0 0 10px;">MOVEMENT TYPE :</td>
+                                        }
+                                        else
+                                        {
+                                            <td style="padding:0;"></td>
+                                        }
+                                        <td width="45px" style="padding:0;">
+                                            @if (Model.MOVEMENTTYPE.Trim() == item.MOVEMENTTYPECODE)
+                                            {
+                                                <div style="width:30px;height:16px;line-height:16px;border:2px solid black;text-align:center;">X</div>
+                                            }
+                                            else
+                                            {
+                                                <div style="width:30px;height:16px;border:2px solid black;"></div>
+                                            }
+                                        </td>
+                                        <td width="600px" style="padding:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">@item.MOVEMENTTYPECODE @item.MOVEMENTTYPEDESC</td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                        <td width="200px" style="border-left:2px solid black;text-align:center;white-space:nowrap;">
+                            <div style="height:45px;padding:2px 8px 0;box-sizing:border-box;">
+                                <div>DATE</div>
+                                <div style="font-size:16px;font-weight:normal;height:22px;border-bottom:1px solid black;">
+                                    @if (Model.CREATEDATE.HasValue) { @Model.CREATEDATE.Value.ToShortDateString() }
+                                </div>
+                            </div>
+                            <div style="height:45px;padding:2px 8px 0;box-sizing:border-box;">
+                                <div>TIME</div>
+                                <div style="font-size:16px;font-weight:normal;height:22px;border-bottom:1px solid black;">
+                                    @if (Model.CREATEDATE.HasValue) { @Model.CREATEDATE.Value.ToShortTimeString() }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;height:35px;">PART NUMBER</td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;">PLANT</td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;">DESCRIPTION</td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;">BATCH NO.</td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;">QUANTITY</td>
+                    </tr>
+
+                    @for (int i = p_start; i < p_end; i++)
+                    {
+                        if (i < Model.INVENTORYTRANSFERDETAILS.Count)//Create row with data
+                        {
+                            string partnumberImg = "";
+                            string batchnoImg = "";
+                            string quantityImg = "";
+
+                            if (Model.INVENTORYTRANSFERDETAILS[i].BARCODEPARTNUMBER != null)
+                            {
+                                var base64_partnumber = Convert.ToBase64String(Model.INVENTORYTRANSFERDETAILS[i].BARCODEPARTNUMBER);
+                                partnumberImg = String.Format("data:image/gif;base64,{0}", base64_partnumber);
+                            }
+
+                            if (Model.INVENTORYTRANSFERDETAILS[i].BARCODEPARTNUMBER != null)
+                            {
+                                var base64_batchno = Convert.ToBase64String(Model.INVENTORYTRANSFERDETAILS[i].BARCODEBATCHNO);
+                                batchnoImg = String.Format("data:image/gif;base64,{0}", base64_batchno);
+                            }
+
+                            if (Model.INVENTORYTRANSFERDETAILS[i].BARCODEPARTNUMBER != null)
+                            {
+                                var base64_quantity = Convert.ToBase64String(Model.INVENTORYTRANSFERDETAILS[i].BARCODEQUANTITY);
+                                quantityImg = String.Format("data:image/gif;base64,{0}", base64_quantity);
+                            }
+
+                            <tr style="font-size:12px;height:33px;">
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;overflow:hidden;">
+                                    <div style="display:flex;align-items:center;height:25px;overflow:hidden;white-space:nowrap;">
+                                        <span style="flex:none;white-space:nowrap;">@Model.INVENTORYTRANSFERDETAILS[i].PARTNUMBER</span>
+                                        @if (!string.IsNullOrEmpty(partnumberImg))
+                                        {<img src="@partnumberImg" height="25" style="flex:none;margin-left:auto;" />}
+                                    </div>
+                                </td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">@Model.INVENTORYTRANSFERDETAILS[i].PLANTCODE</td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;vertical-align:top;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">@Model.INVENTORYTRANSFERDETAILS[i].DESCRIPTION</div></td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;overflow:hidden;">
+                                    <div style="display:flex;align-items:center;height:25px;overflow:hidden;white-space:nowrap;">
+                                        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;">@Model.INVENTORYTRANSFERDETAILS[i].BATCHNO</span>
+                                        @if (!string.IsNullOrEmpty(batchnoImg))
+                                        {<img src="@batchnoImg" height="25" style="flex:none;" />}
+                                    </div>
+                                </td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;overflow:hidden;">
+                                    <div style="display:flex;align-items:center;height:25px;overflow:hidden;white-space:nowrap;">
+                                        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;">@Model.INVENTORYTRANSFERDETAILS[i].QUANTITY</span>
+                                        @if (!string.IsNullOrEmpty(quantityImg))
+                                        {<img src="@quantityImg" height="25" style="flex:none;" />}
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        else //Create row with empty data
+                        {
+                            <tr style="font-size:12px;height:33px;">
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;"></td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;"></td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;"></td>
+                                <td style="font-size:12px;border:2px solid black;text-align:left;padding:2px;"></td>
+                                <td style="font-size:12px;border:2px solid black;text-align:right;padding:2px;"></td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+                <!--Footer-->
+                <table style="border: 2px solid black; position: absolute; left: 20px; top: 725px; width: 855px;">
+                    <tr>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;height:35px;">INITIATED BY</td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;">APPROVED BY</td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;">RECEIVED BY</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;height:70px;"></td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;"></td>
+                        <td style="font-size:14px;font-weight:bold;border:2px solid black;text-align:center;"></td>
+                    </tr>
+                </table>
+
+                <div style="font-size: 14px; font-weight: bold; position: absolute; top: 725px; left: 960px;">________________________________</div>
+                <div style="font-size: 14px; font-weight: bold; position: absolute; top: 745px; left: 890px;">_________________________________________</div>
+                <div style="font-size: 14px; font-weight: bold; position: absolute; top: 765px; left: 890px;">_________________________________________</div>
+                <div style="font-size: 14px; font-weight: bold; position: absolute; top: 785px; left: 890px; width: 330px;">Ref: @refdoc</div>
+                <div style="font-size: 14px; position: absolute; top: 725px; left: 890px; width: 330px; max-width: 330px;"><p style="max-width:330px;word-break:break-all;"><b>REMARK : </b> @Model.REMARK</p></div>
+                <div style="font-size: 12px; font-weight: bold; position: absolute; top: 820px; left: 1150px;">Page @(pages + 1) of @all_page</div>
+                <!--End Footer-->
+
+            </div>
+        }
+    }
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
