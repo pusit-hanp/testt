@@ -1,0 +1,617 @@
+﻿@model InventoryTransfer.ViewModels.InvenTransferViewModel
+@{
+    ViewBag.Title = "Create Inventory Transfer";
+}
+
+@Styles.Render("~/Content/themes/base/css")
+
+<div id="dialogSearchPallet" title="Search Pallet" style="font-size: small;">
+    @*@Html.Partial("_SearchPallet")*@
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="s_pallet">Pallet ID</label>
+                    <input type="text" class="form-control" id="s_pallet" name="s_pallet" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="s_part">Part No.</label>
+                    <input type="text" class="form-control" id="s_part" name="s_part" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="s_from">Create Date from</label>
+                    <input type="text" class="form-control" id="s_from" name="s_from" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="s_to">to</label>
+                    <input type="text" class="form-control" id="s_to" name="s_to" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="s_desc">Description</label>
+                    <input type="text" class="form-control" id="s_desc" name="s_desc" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-danger btn-block" type="reset">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                    Reset
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="button" id="btnSearchPallet">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    Search
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div style="margin-top:20px;">
+        <table id="tbPallet" class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Pallet ID</th>
+                    <th>Part No.</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Create Date</th>
+                    <th>Create By</th>
+                    <th>No.</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    @*<div id="PalletResult">
+    </div>*@
+</div>
+
+@using (Html.BeginForm("Index", "CreateIT", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", id = "form-create" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("MasterDataPartNumbers", Request.Form["MasterDataPartNumbers"])
+    @*@Html.ValidationSummary("", new { @class = "alert alert-danger" })*@
+
+    <div class="panel panel-primary">
+        <div class="panel-heading"><b>Create Inventory Transfer</b></div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">@Html.LabelFor(model => model.ITNUMBER, new { @class = "control-label" })</div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ITNUMBER, new { @class = "form-control input-sm", placeholder = "Wait for Generate...", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-1 text-right">@Html.LabelFor(model => model.PRODUCTID, new { @class = "control-label" })</div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(m => m.PRODUCTID, new SelectList(Model.PRODUCTS, "PRODUCTID", "PRODUCTTEXT", Model.PRODUCTS.FirstOrDefault()), new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.PRODUCTID)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.MOVEMENTTYPEID, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-10">
+                        @foreach (var item in Model.MOVEMENTTYPES)
+                        {
+                            if (!Model.MOVEMENTTYPEID.HasValue && item.MOVEMENTTYPEID == Model.MOVEMENTTYPES.First().MOVEMENTTYPEID)
+                            {
+                                <p>@Html.RadioButtonFor(m => m.MOVEMENTTYPEID, item.MOVEMENTTYPEID, new { Checked = "checked", data_code = item.MOVEMENTTYPECODE }) @item.MOVEMENTTYPECODE @item.MOVEMENTTYPEDESC </p>
+                            }
+                            else
+                            {
+                                <p>@Html.RadioButtonFor(m => m.MOVEMENTTYPEID, item.MOVEMENTTYPEID, new { data_code = item.MOVEMENTTYPECODE }) @item.MOVEMENTTYPECODE @item.MOVEMENTTYPEDESC </p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="NotShowOnlyZ31">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.PLANTID, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(m => m.PLANTID, new SelectList(Model.PLANTS, "PLANTID", "PLANTCODE", Model.PLANTS.FirstOrDefault()), new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.PLANTID)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="ShowOnlyZ31">
+                <div class="form-group">
+                    @{
+                        var defaultFromPlantId = Model.PLANTS.FirstOrDefault(x => x.PLANTCODE == "ITHU").PLANTID;
+                        var defaultToPlantId = Model.PLANTS.FirstOrDefault(x => x.PLANTCODE == "ITH1").PLANTID;
+                    }
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.FROMPLANTID, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(m => m.FROMPLANTID, new SelectList(Model.PLANTS, "PLANTID", "PLANTCODE", defaultFromPlantId), new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.FROMPLANTID)
+                    </div>
+                    <div class="col-md-3 text-right">
+                        @Html.LabelFor(model => model.TOPLANTID, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(m => m.TOPLANTID, new SelectList(Model.PLANTS, "PLANTID", "PLANTCODE", defaultToPlantId), new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.TOPLANTID)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.FROMLOCATIONID, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(m => m.FROMLOCATIONID, new SelectList(Model.LOCATIONS, "LOCATIONID", "LOCATIONTEXT", Model.LOCATIONS.FirstOrDefault()), new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.FROMLOCATIONID)
+                    </div>
+                    @*<div class="col-md-2"></div>*@
+                    <div class="col-md-3 text-right">
+                        @Html.LabelFor(model => model.TOLOCATIONID, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(m => m.TOLOCATIONID, new SelectList(Model.LOCATIONS, "LOCATIONID", "LOCATIONTEXT", Model.LOCATIONS.FirstOrDefault()), new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.TOLOCATIONID)
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">@Html.LabelFor(model => model.CREATEDATE, new { @class = "control-label" })</div>
+                    <div class="col-md-3">
+
+                        <div class="input-group date datepicker">
+                            @Html.TextBoxFor(model => model.CREATEDATE, "{0:dd/MM/yyyy}", new { @class = "form-control input-sm", disabled = "disabled" })
+                            <span class="input-group-btn">
+                                <button class="btn btn-default input-sm" id="dpk" type="button" disabled><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button>
+                            </span>
+                        </div>
+                        @Html.HiddenFor(model => model.CREATEDATE)
+                    </div>
+                    @*<div class="col-md-1"></div>*@
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.CREATEBY, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.CREATEBY, new { @class = "form-control input-sm", disabled = "disabled" })
+                        @Html.HiddenFor(model => model.CREATEBY)
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.REMARK, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.REMARK, new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        @Html.LabelFor(model => model.ATTACHEDFILE, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8"><input type="file" name="file" /></div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 text-right"><label class="control-label">Search Pallet ID</label></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-sm btn-block" type="button" id="btnSearchPalletForm">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Search Pallet
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(model => model.PALLETID, new { @class = "form-control input-sm", placeholder = "Selected Pallet ID", @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.PALLET_CREATEBY)
+                        @Html.HiddenFor(model => model.PALLET_DATE)
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="notificationList" class="table table-striped">
+            <thead>
+                <tr class="control-label">
+                    <th>@Html.DisplayNameFor(model => model.INVENTORYTRANSFERDETAILS.First().NO)</th>
+                    <th>@Html.DisplayNameFor(model => model.INVENTORYTRANSFERDETAILS.First().PARTNUMBER)</th>
+                    <th>Plant</th>
+                    <th>@Html.DisplayNameFor(model => model.INVENTORYTRANSFERDETAILS.First().DESCRIPTION)</th>
+                    <th>@Html.DisplayNameFor(model => model.INVENTORYTRANSFERDETAILS.First().BATCHNO)</th>
+                    <th>@Html.DisplayNameFor(model => model.INVENTORYTRANSFERDETAILS.First().QUANTITY)</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbodyList">
+                @for (int i = 0; i < Model.INVENTORYTRANSFERDETAILS.Count; i++)
+                {
+                    int no = i + 1;
+                    <tr>
+                        <td>@no</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.INVENTORYTRANSFERDETAILS[i].PARTNUMBER, new { @class = "form-control input-sm", @onkeyup = "this.value=this.value.toUpperCase()", @onblur = "this.value=this.value.toUpperCase()" })
+                            @Html.ValidationMessageFor(model => model.INVENTORYTRANSFERDETAILS[i].PARTNUMBER, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.INVENTORYTRANSFERDETAILS[i].PLANTCODE, new { @class = "form-control input-sm", maxlength = "4" })
+                            @Html.ValidationMessageFor(model => model.INVENTORYTRANSFERDETAILS[i].PLANTCODE, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.INVENTORYTRANSFERDETAILS[i].DESCRIPTION, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(model => model.INVENTORYTRANSFERDETAILS[i].DESCRIPTION, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.INVENTORYTRANSFERDETAILS[i].BATCHNO, new { @class = "form-control input-sm", @onkeyup = "this.value=this.value.toUpperCase()", @onblur = "this.value=this.value.toUpperCase()" })
+                            @Html.ValidationMessageFor(model => model.INVENTORYTRANSFERDETAILS[i].BATCHNO, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.INVENTORYTRANSFERDETAILS[i].QUANTITY, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(model => model.INVENTORYTRANSFERDETAILS[i].QUANTITY, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-info" type="button" id="btnGetMasterData" style="display:none;">Get Master Data</button>
+        <button class="btn btn-primary" type="submit" id="btnGenerateDocument"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Generate Document &amp; Print Form</button>
+    </div>
+}
+<br />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script type="text/javascript">
+        var masterDataReady = false;
+        var masterDataRequestId = 0;
+
+        function requiresMasterData() {
+            var code = String($('input[name="MOVEMENTTYPEID"]:checked').data("code") || "");
+            return code === "311" || code === "313" || code === "315";
+        }
+
+        function updateMasterDataGate() {
+            var required = requiresMasterData();
+            var code = String($('input[name="MOVEMENTTYPEID"]:checked').data("code") || "");
+            $("#btnGetMasterData").toggle(required || code === "Z31");
+            $("#btnGenerateDocument").prop("disabled", required && !masterDataReady);
+        }
+
+        function invalidateMasterData() {
+            masterDataReady = false;
+            masterDataRequestId++;
+            $("#MasterDataPartNumbers").val("");
+            $("#btnGetMasterData").prop("disabled", false);
+            updateMasterDataGate();
+        }
+
+        function restoreMasterDataGate(rows, signature) {
+            var partNumbers = [];
+            for (var i = 0; i < rows.length; i++) {
+                partNumbers.push(String(rows[i].part.val() || "").trim().toUpperCase());
+            }
+            masterDataReady = partNumbers.length > 0 && signature === JSON.stringify(partNumbers);
+            for (var i = 0; i < rows.length; i++) {
+                if (rows[i].description.val()) rows[i].description.data("userEdited", true);
+            }
+            updateMasterDataGate();
+        }
+
+        function getDetailRows() {
+            var rows = [];
+            $("#tbodyList tr").each(function () {
+                var row = $(this);
+                var part = row.find("input[name$='.PARTNUMBER']");
+                if (part.length && String(part.val() || "").trim()) {
+                    rows.push({
+                        part: part,
+                        description: row.find("input[name$='.DESCRIPTION']"),
+                        plant: row.find("input[name$='.PLANTCODE']")
+                    });
+                }
+            });
+            return rows;
+        }
+
+        function applyMasterDataResult(rows, items) {
+            var byPart = {};
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].partNumber) {
+                    byPart[String(items[i].partNumber).toUpperCase()] = items[i];
+                }
+            }
+            for (var i = 0; i < rows.length; i++) {
+                if (!Object.prototype.hasOwnProperty.call(byPart, rows[i].part.val()) || typeof byPart[rows[i].part.val()].plant !== "string") {
+                    return false;
+                }
+            }
+            for (var i = 0; i < rows.length; i++) {
+                var item = byPart[rows[i].part.val()];
+                if (item.found) {
+                    rows[i].description.val(item.description || "");
+                    rows[i].description.data("userEdited", false);
+                } else if (!rows[i].description.data("userEdited")) {
+                    rows[i].description.val("");
+                }
+                rows[i].plant.val(item.plant);
+            }
+            return true;
+        }
+
+        $(document).ready(function () {
+            let code = $('input[name="MOVEMENTTYPEID"]:checked').data("code");
+            showPlant(code, false);
+            restoreMasterDataGate(getDetailRows(), $("#MasterDataPartNumbers").val());
+
+            $(document).on("input", "#tbodyList input[name$='.PARTNUMBER']", function () {
+                $(this).closest("tr").find("input[name$='.DESCRIPTION']").data("userEdited", false);
+                invalidateMasterData();
+            });
+
+            $(document).on("input", "#tbodyList input[name$='.DESCRIPTION']", function () {
+                $(this).data("userEdited", true);
+            });
+
+            $("#FROMLOCATIONID").change(function () {
+                syncZ31Location("#FROMLOCATIONID", "#TOLOCATIONID");
+            });
+            $("#TOLOCATIONID").change(function () {
+                syncZ31Location("#TOLOCATIONID", "#FROMLOCATIONID");
+            });
+
+            $("#form-create").on("submit", function (e) {
+                if (requiresMasterData() && !masterDataReady) {
+                    e.preventDefault();
+                    alert("Get Master Data before generating the document.");
+                }
+            });
+
+            $("#btnGetMasterData").click(function () {
+                var rows = getDetailRows();
+                var partNumbers = [];
+                for (var i = 0; i < rows.length; i++) {
+                    var partNumber = String(rows[i].part.val() || "").trim().toUpperCase();
+                    rows[i].part.val(partNumber);
+                    partNumbers.push(partNumber);
+                }
+                invalidateMasterData();
+                if (!partNumbers.length) {
+                    alert("Enter at least one Part Number before getting master data.");
+                    return;
+                }
+                var requestId = masterDataRequestId;
+                $("#btnGetMasterData").prop("disabled", true);
+                $.ajax({
+                    url: '@Url.Action("GetMasterData", "CreateIT")',
+                    type: "POST",
+                    traditional: true,
+                    data: {
+                        __RequestVerificationToken: $("#form-create input[name='__RequestVerificationToken']").val(),
+                        partNumbers: partNumbers
+                    },
+                    success: function (response) {
+                        if (requestId !== masterDataRequestId) return;
+                        if (response && response.success === true && response.items && applyMasterDataResult(rows, response.items)) {
+                            masterDataReady = true;
+                            $("#MasterDataPartNumbers").val(JSON.stringify(partNumbers));
+                            updateMasterDataGate();
+                        } else {
+                            alert("Could not get complete master data. Please try again.");
+                        }
+                    },
+                    error: function (xhr) {
+                        if (requestId === masterDataRequestId) alert((xhr.responseJSON && xhr.responseJSON.message) || "Could not get master data. Please try again.");
+                    },
+                    complete: function () {
+                        if (requestId === masterDataRequestId) $("#btnGetMasterData").prop("disabled", false);
+                    }
+                });
+            });
+
+            $("#dialogSearchPallet").dialog({
+                autoOpen: false,
+                modal: true,
+                width: 650,
+                minHeight: 0,
+                maxHeight: 500,
+                //height: 350,//'auto',//350,
+                open: function (event, ui) {
+                    originalContent = $("#dialogSearchPallet").html();
+                    $("#s_from").datepicker({
+                        dateFormat: 'dd/mm/yy',
+                        changeMonth: true,
+                        changeYear: true,
+                        onClose: function (selectedDate) {
+                            $("#s_to").datepicker("option", "minDate", selectedDate);
+                        }
+                    });
+                    $("#s_to").datepicker({
+                        dateFormat: 'dd/mm/yy',
+                        changeMonth: true,
+                        changeYear: true,
+                        onClose: function (selectedDate) {
+                            $("#s_from").datepicker("option", "maxDate", selectedDate);
+                        }
+                    });
+                },
+                close: function (event, ui) {
+                    $("#dialogSearchPallet").html(originalContent);
+                }
+            });
+
+            $("#btnSearchPalletForm").click(function (e) {
+                e.preventDefault();
+                $("#dialogSearchPallet").dialog("open");
+            });
+
+            $(document).on("click", "#btnSearchPallet", function () {
+                var obj = new Object();
+                obj.id = $("#s_pallet").val();
+                obj.part = $("#s_part").val();
+                obj.from = $("#s_from").val();
+                obj.to = $("#s_to").val();
+                obj.desc = $("#s_desc").val();
+
+                $.get('@Url.Action("GetPallet", "CreateIT")', obj, function (data) {
+                    $("#tableBody").empty();
+                    var genlist = "";
+                    for (var i = 0; i < data.length; i++) {
+                        genlist = "<tr>";
+                        if (data[i].Selected == 'A') {
+                            genlist += "<td><button type='button' class='selPallet btn btn-primary btn-xs'>Select</button></td>";
+                        } else {
+                            genlist += "<td>Created</td>";
+                        }
+
+                        genlist += "<td>" + data[i].Palletid + "</td>" +
+                            "<td>" + data[i].Part_number + "</td>" +
+                            "<td>" + data[i].Description + "</td>" +
+                            "<td>" + data[i].Quantity + "</td>" +
+                            "<td>" + moment(data[i].Submit_date).format('L') + "</td>" +
+                            "<td>" + data[i].Submit_actor + "</td>" +
+                            "<td>" + (i + 1) + "</td>" +
+                            "</tr>";
+                        $("#tbPallet tbody").append(genlist);
+                    }
+
+                });
+            });
+
+            $(document).on("click", ".selPallet", function (e) {
+                var trRef = $(this).closest('tr');
+                var obj = new Object();
+                obj.id = trRef.find('td').eq(1).text();
+                $("#PALLETID").val(obj.id);
+                $("#PALLET_CREATEBY").val(trRef.find('td').eq(6).text());
+                $("#PALLET_DATE").val(trRef.find('td').eq(5).text());
+                //console.log(trRef.find('td').eq(1).text());
+                $("#dialogSearchPallet").dialog("close");
+                invalidateMasterData();
+
+            for (var k = 0; k < 10; k++) {//Set item 1-10 empty
+                $("#INVENTORYTRANSFERDETAILS_" + k + "__PARTNUMBER").val("");
+                $("#INVENTORYTRANSFERDETAILS_" + k + "__PLANTCODE").val("");
+                $("#INVENTORYTRANSFERDETAILS_" + k + "__DESCRIPTION").val("").data("userEdited", false);
+                $("#INVENTORYTRANSFERDETAILS_" + k + "__BATCHNO").val("");
+                $("#INVENTORYTRANSFERDETAILS_" + k + "__QUANTITY").val("");
+            }
+
+            $.get('@Url.Action("GetPallet", "CreateIT")', obj, function (data) {
+                for (var i = 0; i < data.length && i < 10; i++) {//Set item 1-10
+                    $("#INVENTORYTRANSFERDETAILS_" + i + "__PARTNUMBER").val(data[i].Part_number);
+                    $("#INVENTORYTRANSFERDETAILS_" + i + "__PLANTCODE").val("");
+                    $("#INVENTORYTRANSFERDETAILS_" + i + "__DESCRIPTION").val(data[i].Description);
+                    $("#INVENTORYTRANSFERDETAILS_" + i + "__BATCHNO").val("WIP");
+                    $("#INVENTORYTRANSFERDETAILS_" + i + "__QUANTITY").val(data[i].Quantity);
+                }
+
+                $("#tbodyList").find("tr:gt(9)").remove();//Remove row that index more than 9
+
+                var moreten = "";
+                for (var i = 10; i < data.length; i++) {//For Test i=0, Real i=10
+                    //j = i + 10;//For Test
+                    //j = i;//For Real
+                    var j = i;
+                    moreten += "<tr><td>" + (j + 1) + "</td>" +
+                        "<td><input type='text' class='form-control input-sm' id='INVENTORYTRANSFERDETAILS_" + j + "__PARTNUMBER' name='INVENTORYTRANSFERDETAILS[" + j + "].PARTNUMBER' maxlength='20' onblur='this.value=this.value.toUpperCase()' onkeyup='this.value=this.value.toUpperCase()' value='" + data[i].Part_number + "' /></td>" +
+
+                        "<td><input type='text' class='form-control input-sm' id='INVENTORYTRANSFERDETAILS_" + j + "__PLANTCODE' name='INVENTORYTRANSFERDETAILS[" + j + "].PLANTCODE' maxlength='4' value='' /></td>" +
+
+                        "<td><input type='text' class='form-control input-sm' id='INVENTORYTRANSFERDETAILS_" + j + "__DESCRIPTION' name='INVENTORYTRANSFERDETAILS[" + j + "].DESCRIPTION' maxlength='50' value='" + data[i].Description + "' /></td>" +
+
+                        "<td><input type='text' class='form-control input-sm' id='INVENTORYTRANSFERDETAILS_" + j + "__BATCHNO' name='INVENTORYTRANSFERDETAILS[" + j + "].BATCHNO' maxlength='12' onblur='this.value=this.value.toUpperCase()' onkeyup='this.value=this.value.toUpperCase()' value='WIP' /></td>" +
+
+                        "<td><input type='number' class='form-control input-sm' min='0' id='INVENTORYTRANSFERDETAILS_" + j + "__QUANTITY' name='INVENTORYTRANSFERDETAILS[" + j + "].QUANTITY' value='" + data[i].Quantity + "' /></td></tr>";
+                }
+                //console.log(moreten);
+                $("#tbodyList").append(moreten);
+                invalidateMasterData();
+            });
+        });
+
+        $('input[name="MOVEMENTTYPEID"]').change(function (e) {
+            e.preventDefault();
+            showPlant($(this).data("code"), true);
+            invalidateMasterData();
+        });
+    });
+
+    function syncZ31Location(changed, other) {
+        if (String($('input[name="MOVEMENTTYPEID"]:checked').data("code") || "") === "Z31") {
+            $(other).val($(changed).val());
+        }
+    }
+
+    function showPlant(code, resetDefaults) {
+        let isZ31 = (code === "Z31");
+
+        // Toggle Visibility
+        $("#ShowOnlyZ31").toggle(isZ31);
+        $("#NotShowOnlyZ31").toggle(!isZ31);
+
+        // If it is Z31, force select the correct plant values by finding the text options
+        if (isZ31 && resetDefaults) {
+            // Find the option with the text 'ITHU' and select its value
+            $("#FROMPLANTID option").filter(function () {
+                return $(this).text().trim() === "ITHU";
+            }).prop('selected', true);
+
+            // Find the option with the text 'ITH1' and select its value
+            $("#TOPLANTID option").filter(function () {
+                return $(this).text().trim() === "ITH1";
+            }).prop('selected', true);
+        }
+        if (isZ31) $("#TOLOCATIONID").val($("#FROMLOCATIONID").val());
+
+        // Disable hidden elements so they don't submit garbage data
+        $("#ShowOnlyZ31 :input").prop("disabled", !isZ31);
+        $("#NotShowOnlyZ31 :input").prop("disabled", isZ31);
+    }
+    </script>
+}
