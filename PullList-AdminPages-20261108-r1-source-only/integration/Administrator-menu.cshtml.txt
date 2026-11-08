@@ -1,0 +1,16 @@
+@* Insert these <li> entries inside the EXISTING Administrator menu <ul>.
+   Keep the current Administrator container, layout, classes and other menu entries.
+   If the company's menu is not a <ul>, adapt only the surrounding markup.
+   Endpoint authorization is independent of menu visibility. *@
+@if (PulllistMaterial.Infrastructure.PullListPageAccess.HasAccess(
+    Session["auth"], Session["auth_item"],
+    System.Configuration.ConfigurationManager.AppSettings["costRollup"]))
+{
+    <li><a href="@Url.Action("Index", "CostRollup")">Cost Rollup</a></li>
+}
+@if (PulllistMaterial.Infrastructure.PullListPageAccess.HasAccess(
+    Session["auth"], Session["auth_item"],
+    System.Configuration.ConfigurationManager.AppSettings["serviceMonitoring"]))
+{
+    <li><a href="@Url.Action("Index", "ServiceMonitoring")">Service Monitoring</a></li>
+}

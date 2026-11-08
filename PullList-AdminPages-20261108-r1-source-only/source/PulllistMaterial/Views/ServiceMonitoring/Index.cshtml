@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Service Monitoring";
+}
+@section Styles {
+    <style>
+        #serviceMonitoring { max-width: 1500px; margin: 0 auto; }
+        #serviceMonitoring .sm-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0; }
+        #serviceMonitoring .sm-summary { overflow-x: auto; }
+        #serviceMonitoring .sm-counts { width: 100%; min-width: 960px; border-collapse: collapse; }
+        #serviceMonitoring .sm-counts th, #serviceMonitoring .sm-counts td { padding: 10px; border: 1px solid #d5dbe2; }
+        #serviceMonitoring .sm-counts thead th { background: #f2f5f9; text-align: center; vertical-align: middle; }
+        #serviceMonitoring .sm-counts tbody td { text-align: right; }
+        #serviceMonitoring .sm-counts .sm-total { background: #edf3fa; font-weight: 600; }
+        #serviceMonitoring .sm-muted { color: #596475; }
+        #serviceMonitoring .sm-tracking { margin-top: 28px; padding-top: 16px; border-top: 1px solid #d5dbe2; }
+        #serviceMonitoring #monitoringSlip { width: 320px; max-width: 100%; }
+        #serviceMonitoring .sm-group { margin: 16px 0; padding: 16px; border: 1px solid #ccd4df; border-radius: 4px; }
+        #serviceMonitoring .sm-group-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+        #serviceMonitoring .sm-group h3 { font-size: 18px; margin: 0; overflow-wrap: anywhere; }
+        #serviceMonitoring .sm-source { display: inline-block; margin-left: 12px; font-size: 13px; color: #334a65; background: #edf2f8; padding: 3px 8px; border-radius: 3px; }
+        #serviceMonitoring .sm-header-table { width: 100%; margin: 14px 0; table-layout: fixed; }
+        #serviceMonitoring .sm-header-table th, #serviceMonitoring .sm-header-table td { border: 1px solid #e1e5eb; padding: 7px 9px; vertical-align: top; overflow-wrap: anywhere; white-space: pre-wrap; }
+        #serviceMonitoring .sm-header-table th { width: 18%; background: #f6f8fa; color: #596475; font-weight: normal; }
+        #serviceMonitoring .sm-header-table td { width: 32%; }
+        #serviceMonitoring .sm-items td { vertical-align: top; white-space: pre-wrap; overflow-wrap: anywhere; }
+        #serviceMonitoring .sm-items th { white-space: nowrap; }
+        #serviceMonitoring .sm-items td:first-child { min-width: 130px; }
+        #serviceMonitoring .sm-items td:nth-child(2) { min-width: 220px; }
+        #serviceMonitoring .sm-items .sm-number { text-align: right; white-space: nowrap; }
+        #serviceMonitoring .sm-error { color: #a12622; }
+        #serviceMonitoring .sm-notice { color: #705200; white-space: pre-wrap; }
+        #serviceMonitoring summary { cursor: pointer; }
+    </style>
+}
+<div id="serviceMonitoring"
+     data-summary-url="@Url.Action("GetSummary", "ServiceMonitoring")"
+     data-batch-url="@Url.Action("TrackBatch", "ServiceMonitoring")"
+     data-app-path="@Url.Content("~/")"
+     data-user-key="@ViewBag.BoardKey">
+    <h2>Service Monitoring</h2>
+    <p class="sm-muted">จำนวน slips ใน TPHEADER ตาม STATUS ณ เวลาที่โหลด ไม่ใช่สถานะการทำงานของ Windows Service</p>
+    <div class="sm-toolbar">
+        <button type="button" id="monitoringSummaryRefresh" class="btn btn-default btn-sm">Refresh counts</button>
+        <span id="monitoringSummaryTime" class="sm-muted">ยังไม่ได้โหลดจำนวน slips</span>
+    </div>
+    <p id="monitoringSummaryError" class="sm-error" role="alert"></p>
+    <div id="monitoringSummary" class="sm-summary" aria-live="polite"></div>
+
+    <section class="sm-tracking" aria-labelledby="monitoringTrackingTitle">
+        <h2 id="monitoringTrackingTitle">Slip tracking</h2>
+        <p class="sm-muted">ค้นหา MISLIP_NO แบบเต็มได้ทุก prefix สูงสุด 50 slips ค้นหาซ้ำเพื่อโหลดข้อมูลล่าสุดของรายการเดิม</p>
+        <form id="monitoringSearchForm">
+            @Html.AntiForgeryToken()
+            <label for="monitoringSlip">MISLIP_NO</label>
+            <div class="sm-toolbar">
+                <input id="monitoringSlip" name="mislipNo" class="form-control" maxlength="50" autocomplete="off" required />
+                <button type="submit" class="btn btn-primary">Search / refresh slip</button>
+                <button type="button" id="monitoringBoardRefresh" class="btn btn-default">Refresh board</button>
+                <button type="button" id="monitoringBoardClear" class="btn btn-default">Clear all</button>
+            </div>
+        </form>
+        <p class="sm-muted">จำรายการใน tab นี้ 30 นาทีหลังเพิ่ม ลบ หรือล้างรายการ การค้นหา slip เดิม reload และ Refresh board ไม่ต่ออายุรายการ</p>
+        <p class="sm-muted">ใช้ TPHEADER + TPITEMS ก่อน หากไม่มี TPHEADER จึงใช้ WIPHEADER + WIPITEMS การลบและ Clear all มีผลเฉพาะรายการบนหน้านี้</p>
+        <p id="monitoringStorageNotice" class="sm-notice" role="status"></p>
+        <p id="monitoringNotice" class="sm-notice" role="status"></p>
+        <p id="monitoringBoardStatus" class="sm-muted" role="status">0 / 50 slips</p>
+        <div id="monitoringBoard"></div>
+    </section>
+</div>
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/ServiceMonitoringBoard.js")"></script>
+    <script src="@Url.Content("~/Scripts/Views/ServiceMonitoring.js")"></script>
+}

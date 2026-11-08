@@ -1,0 +1,6 @@
+<!-- Merge these entries into the existing Pulllist.Service project. Do not replace the project file.
+     Keep the existing DAL ProjectReference and framework references. -->
+<ItemGroup>
+  <Compile Include="CostRollupService.cs" />
+  <Compile Include="ServiceMonitoringService.cs" />
+</ItemGroup>

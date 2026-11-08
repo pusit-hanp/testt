@@ -1,0 +1,14 @@
+<!-- Merge these entries into the actual company web project; its folder may be named PullListMaterial.
+     The observed namespace is PulllistMaterial. This is not a replacement .csproj.
+     The source list follows the implementation plan and must match the delivered source directory. -->
+<ItemGroup>
+  <Compile Include="Controllers\CostRollupController.cs" />
+  <Compile Include="Controllers\ServiceMonitoringController.cs" />
+  <Compile Include="Infrastructure\PullListPageAccess.cs" />
+  <Compile Include="Infrastructure\PullListPageAuthorizeAttribute.cs" />
+  <Content Include="Scripts\Views\CostRollup.js" />
+  <Content Include="Scripts\Views\ServiceMonitoring.js" />
+  <Content Include="Scripts\Views\ServiceMonitoringBoard.js" />
+  <Content Include="Views\CostRollup\Index.cshtml" />
+  <Content Include="Views\ServiceMonitoring\Index.cshtml" />
+</ItemGroup>

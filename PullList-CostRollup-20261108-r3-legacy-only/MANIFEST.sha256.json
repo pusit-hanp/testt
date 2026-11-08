@@ -1,0 +1,62 @@
+﻿{
+    "package":  "PullList-CostRollup-20261108-r3-legacy-only",
+    "kind":  "LEGACY_SOURCE_PATCH_FRESH_DATABASE",
+    "hashAlgorithm":  "SHA256",
+    "files":  [
+                  {
+                      "path":  "config/appSettings.fragment.config",
+                      "bytes":  334,
+                      "sha256":  "25D1E45EEFD2389029CBD156561EDE419CB31AC64F3A1C01B476742E3F224EA6"
+                  },
+                  {
+                      "path":  "database/_assert-material-target.sql",
+                      "bytes":  2141,
+                      "sha256":  "A0C6D250A0F10765834D1F830F68E481E60EBDED8A7A20CB5FFB958E5BEC1C00"
+                  },
+                  {
+                      "path":  "database/00-preflight.sql",
+                      "bytes":  3615,
+                      "sha256":  "217653E8806D155F2A11E77A2A4A3F8E692D11830A28C665122BCECECE98593E"
+                  },
+                  {
+                      "path":  "database/01-create-new.sql",
+                      "bytes":  1905,
+                      "sha256":  "9FAA6A4122A97C12FD349DBA61CC3971B7CE3F4FD9879444401530D1C23C9A4E"
+                  },
+                  {
+                      "path":  "database/04-validate.sql",
+                      "bytes":  8659,
+                      "sha256":  "FE54D89A4005EF458BF2966522FAF1160B425C869089A5DB5283CE033ADB5567"
+                  },
+                  {
+                      "path":  "project/CompileItems.fragment.xml",
+                      "bytes":  459,
+                      "sha256":  "91A6F82838640E7A97074159C9F6F22C644AE85C7DBDA9BAC5D2473388D6306F"
+                  },
+                  {
+                      "path":  "README.md",
+                      "bytes":  15102,
+                      "sha256":  "B3A61722BBB1D6DBF0191AB8685EC5A460A377F1D9C9945B13BC6961DB2BEEB1"
+                  },
+                  {
+                      "path":  "source/PS_TpostFromSlip/CostRollup/CostRollupGuard.cs",
+                      "bytes":  9815,
+                      "sha256":  "09BED629901BE8CD41A9BC2451FD9B16AE23125E4A37380CD299CDA8C68AD7FC"
+                  },
+                  {
+                      "path":  "source/PS_TpostFromSlip/CostRollup/MyRepositoryCostRollupStore.cs",
+                      "bytes":  4639,
+                      "sha256":  "7318FBFD99DDC8828CE69443610002848E9A6495368721F36EF7C894A6850DBD"
+                  },
+                  {
+                      "path":  "source/PS_TpostFromSlip/Form1.CostRollup.cs",
+                      "bytes":  1355,
+                      "sha256":  "2A1F0A91DEF2317B2AF06F16649DDC67248227E0571F038FF49561FA2D2434FD"
+                  },
+                  {
+                      "path":  "source/PS_TpostFromSlip/Form1.cs",
+                      "bytes":  41614,
+                      "sha256":  "22914C29BE2B757E6DFEF270FEA4CBA42445E907C49D80AEAD697F5D11BF868E"
+                  }
+              ]
+}

@@ -1,0 +1,8 @@
+<!-- Merge these entries into the existing Pulllist.DAL project. Do not replace the project file.
+     Paths are relative to the company project directory after copying source/Pulllist.DAL. -->
+<ItemGroup>
+  <Compile Include="CostRollup\CostRollupDAO.cs" />
+  <Compile Include="CostRollup\CostRollupModels.cs" />
+  <Compile Include="ServiceMonitoring\ServiceMonitoringDAO.cs" />
+  <Compile Include="ServiceMonitoring\ServiceMonitoringModels.cs" />
+</ItemGroup>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merge this ItemGroup into the existing PS_TpostFromSlip.csproj, before </Project>.
+     Include each file once only. Keep all existing properties and references. -->
+<ItemGroup xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Compile Include="Form1.CostRollup.cs" />
+  <Compile Include="CostRollup\CostRollupGuard.cs" />
+  <Compile Include="CostRollup\MyRepositoryCostRollupStore.cs" />
+</ItemGroup>
